@@ -1,0 +1,7 @@
+---
+# handlers file for autocicdclients
+- name: restart_tomcat_service
+  service:
+    name: tomcat
+    state: restarted
+    enabled: true

@@ -1,0 +1,5 @@
+---
+# vars file for autocicdlb
+virtlb: virtuallb
+clientHost1: client1.example.com
+clientHost2: client2.example.com

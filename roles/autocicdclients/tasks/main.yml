@@ -1,0 +1,25 @@
+---
+# tasks file for autocicdclients
+- name: "Tomcat Web Server Installation"
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - tomcat
+    - tomcat-webapps
+    - tomcat-admin-webapps
+    - firewalld
+
+- name: "Opening firewall port"
+  firewalld:
+    state: enabled
+    port: 8080/tcp
+    immediate: true
+    permanent: true
+
+- name : "Copying index file"
+  copy:
+    src: /etc/ansible/roles/autocicdclients/files/{{ ansible_fqdn }}
+    dest: /var/www/html/index.html
+    mode: 0644
+  notify: restart_tomcat_service

@@ -1,0 +1,10 @@
+---
+- hosts: loadBalancer
+  become: true
+  roles:
+    - autocicdlb
+
+- hosts: webAppServerGroup
+  become: true
+  roles:
+    - autocicdclients

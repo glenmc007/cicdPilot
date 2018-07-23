@@ -1,0 +1,24 @@
+---
+# tasks file for autocicdlb
+- name: "Apache Web Server Install"
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "@Web Server"
+    - firewalld
+
+- name: "Opening firewall port"
+  firewalld:
+    state: enabled
+    service: http
+    immediate: true
+    permanent: true
+
+- name: "Move LB config file"
+  template:
+    src: /etc/ansible/roles/autocicdlb/templates/lb_httpd.conf
+    dest: /etc/httpd/conf.d/lb_httpd.conf
+    mode: 0644
+  notify: restart_httpd_service
+

@@ -1,0 +1,7 @@
+---
+# handlers file for autocicdlb
+- name: restart_httpd_service
+  service:
+    name: httpd
+    state: restarted
+    enabled: true
